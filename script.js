@@ -1,38 +1,46 @@
-// Person constructor function
-function Person(name, age) {
-  this.name = name;
-  this.age = age;
+
+//complete this code
+class Person {
+    age;
+    name;
+    constructor(name,age){
+      this.name=name;
+      this.age=age;
+    }
+    set setAge(age){
+        this.age=age;
+    }
+    get getName(){
+        return this.name;
+    }
 }
 
-// Adding greet method to Person prototype
-Person.prototype.greet = function() {
-  console.log("Hello, my name is " + this.name + ", I am " + this.age + " years old.");
+class Student extends Person {
+    constructor(name,age){
+        super(name,age);
+    }
+    study(){
+        console.log(`${this.name} is studying`);
+    }
 }
 
-// Employee constructor function
-function Employee(name, age, jobTitle) {
-  // Calling Person constructor function with name and age arguments
-  Person.call(this, name, age);
-  this.jobTitle = jobTitle;
+class Teacher extends Person {
+    constructor(name,age){
+        super(name,age);
+    }
+    teach(){
+        console.log(`${this.name} is teaching`);
+    }
 }
 
-// Inheriting the Person prototype in the Employee prototype
-Employee.prototype = Object.create(Person.prototype);
+let student1=new Student('Ramesh',21);
+console.log(student1);
+// student1.teach();
+student1.study();
+let teacher1=new Teacher('Max',30);
+teacher1.teach();
 
-// Resetting the constructor of the Employee prototype
-Employee.prototype.constructor = Employee;
-
-// Adding jobGreet method to Employee prototype
-Employee.prototype.jobGreet = function() {
-  console.log("Hello, my name is " + this.name + ", I am " + this.age + " years old, and my job title is " + this.jobTitle + ".");
-}
-
-// Example usage
-var person = new Person("John Doe", 25);
-person.greet(); // Hello, my name is John Doe, I am 25 years old.
-
-var employee = new Employee("Jane Smith", 30, "Manager");
-employee.greet(); // Hello, my name is Jane Smith, I am 30 years old.
-employee.jobGreet(); // Hello, my name is Jane Smith, I am 30 years old, and my job title is Manager.
-
-
+// Do not change the code below this line
+window.Person = Person;
+window.Student = Student;
+window.Teacher = Teacher;
