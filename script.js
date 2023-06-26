@@ -2,27 +2,25 @@
 function Person(name, age) {
   this.name = name;
   this.age = age;
+	this.greet = function () {
+        console.log(`Hello, my name is ${this.name}, I am ${this.age} years old.`);
+    }
 }
 
 // Adding greet method to Person prototype
-Person.prototype.greet = function() {
-  console.log(`Hello, my name is ${this.name}, I am ${this.age} years old.`);
-};
 
 // Employee constructor function
 function Employee(name, age, jobTitle) {
   Person.call(this, name, age); // Calling the Person constructor using call to set name and age properties
   this.jobTitle = jobTitle;
+	this.jobGreet()=function (){
+		console.log(`Hello, my name is ${this.name}, I am ${this.age} years old, and my job title is ${this.jobTitle} in js.`);
+	}
 }
 
 // Inheriting the Person prototype in the Employee prototype
 Employee.prototype = Object.create(Person.prototype);
 Employee.prototype.constructor = Employee;
-
-// Adding jobGreet method to Employee prototype
-Employee.prototype.jobGreet = function() {
-  console.log(`Hello, my name is ${this.name}, I am ${this.age} years old, and my job title is ${this.jobTitle} in js.`);
-};
 
 // Creating instances of Person and Employee
 const person = new Person("John", 25);
