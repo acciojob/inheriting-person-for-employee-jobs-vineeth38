@@ -1,46 +1,36 @@
-
-//complete this code
-class Person {
-    age;
-    name;
-    constructor(name,age){
-      this.name=name;
-      this.age=age;
-    }
-    set setAge(age){
-        this.age=age;
-    }
-    get getName(){
-        return this.name;
-    }
+// Person constructor function
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
 }
 
-class Student extends Person {
-    constructor(name,age){
-        super(name,age);
-    }
-    study(){
-        console.log(`${this.name} is studying`);
-    }
+// Adding greet method to Person prototype
+Person.prototype.greet = function() {
+  console.log(`Hello, my name is ${this.name}, I am ${this.age} years old.`);
+};
+
+// Employee constructor function
+function Employee(name, age, jobTitle) {
+  Person.call(this, name, age); // Calling the Person constructor using call to set name and age properties
+  this.jobTitle = jobTitle;
 }
 
-class Teacher extends Person {
-    constructor(name,age){
-        super(name,age);
-    }
-    teach(){
-        console.log(`${this.name} is teaching`);
-    }
-}
+// Inheriting the Person prototype in the Employee prototype
+Employee.prototype = Object.create(Person.prototype);
+Employee.prototype.constructor = Employee;
 
-let student1=new Student('Ramesh',21);
-console.log(student1);
-// student1.teach();
-student1.study();
-let teacher1=new Teacher('Max',30);
-teacher1.teach();
+// Adding jobGreet method to Employee prototype
+Employee.prototype.jobGreet = function() {
+  console.log(`Hello, my name is ${this.name}, I am ${this.age} years old, and my job title is ${this.jobTitle} in js.`);
+};
 
-// Do not change the code below this line
-window.Person = Person;
-window.Student = Student;
-window.Teacher = Teacher;
+// Creating instances of Person and Employee
+const person = new Person("John", 25);
+const employee = new Employee("Jane", 30, "Developer");
+
+// Calling the greet method on person
+person.greet(); // Output: Hello, my name is John, I am 25 years old.
+
+// Calling the jobGreet method on employee
+employee.jobGreet(); // Output: Hello, my name is Jane, I am 30 years old, and my job title is Developer in js.
+
